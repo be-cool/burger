@@ -1,15 +1,18 @@
 var connection = require("../config/connection");
 
-function questionMarks(num) {
+function printQuestionMarks(num) {
   var arr = [];
+
   for (var i = 0; i < num; i++) {
     arr.push("?");
   }
+
   return arr.toString();
 }
 
 function objToSql(ob) {
   var arr = [];
+
   for (var key in ob) {
     var value = ob[key];
     if (Object.hasOwnProperty.call(ob, key)) {
@@ -27,8 +30,9 @@ function objToSql(ob) {
 
 
 var orm = {
-  selectAll: function(tableInput, cb) {
-    connection.query("SELECT * FROM " + tableInput + ";", function(err, result) {
+  all: function(tableInput, cb) {
+    var queryString = "SELECT * FROM " + tableInput + ";";
+    connection.query(queryString, function(err, result) {
       if (err) {
         throw err;
       }
@@ -42,7 +46,7 @@ var orm = {
     queryString += cols.toString();
     queryString += ") ";
     queryString += "VALUES (";
-    queryString += questionMarks(vals.length);
+    queryString += printQuestionMarks(vals.length);
     queryString += ") ";
 
     console.log(queryString);
@@ -69,6 +73,7 @@ var orm = {
       if (err) {
         throw err;
       }
+
       cb(result);
     });
   },
