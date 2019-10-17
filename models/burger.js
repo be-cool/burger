@@ -1,9 +1,11 @@
-var express = require ("express");
-var exphbs = require ("express-handlebars");
+const orm = require("../config/orm");
 
-var app = express();
+const burger = {
+  selectAll: cb => orm.selectAll("burgers", res => cb(res)),
+  insertOne: (column_names, values, cb) =>
+    orm.insertOne("burgers", column_names, values, res => cb(res)),
+  updateOne: (values, condition, cb) =>
+    orm.updateOne("burgers", values, condition, res => cb(res))
+};
 
-var PORT = process.env.PORT || 8080;
-
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
+module.exports = burger;

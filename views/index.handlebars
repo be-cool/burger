@@ -1,63 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-11 text-center">
-            </div>
-            <div class="col-11">
-                <h1 class="text-center text-danger">Eat Da Burger!</h1>
-            </div>
-            <div class="col-11">
-                <h2 class="text-center text-danger">Use this web app to eat all da burgers</h2>
-            </div>
-        </div>
+<div class="container">
+  <div class="burger-img"></div>
+  <h1>Eat The Burger!</h1>
+  <div class="burger-container">
+    <ul class="devour-burgers burger-list">
+      {{#each burgers}}
+        {{#unless devoured}}
+        {{> burgers/burgers-block devoured=false}}
+        {{/unless}}
+      {{/each}}
+    </ul>
+    <ul class="eaten-burgers burger-list">
+      {{#each burgers}}
+        {{#if devoured}}
+          {{> burgers/burgers-block devoured=true}}
+        {{/if}}
+      {{/each}}
+    </ul>
+  </div>
+  <form class="burger-input-form">
+    <div class="burger-input-wrapper">
+      <label class="burger-input-label">Enter a burger name</label>
+      <input type="text" placeholder="Whatever Burger" autocomplete="off" id="burger-input" class="burger-input" required />
     </div>
-
-
-        <section class="row">
-            <div class="col-md-5 col-left">
-                <h3>Burgers dat need to be eaten</h3>
-                <table>
-                    {{#each burgers}}
-                    {{#unless devoured}}
-                    {{> burgers/burger-block}}
-                    {{/unless}}
-                    {{/each}}
-                </table>
-            </div>
-            <div class="col-md-5 col-right">
-                <h3>Burgers dat been eaten</h3>
-                {{#each burgers}}
-                {{#if devoured}}
-                <div>{{id}}. {{burger_name}}</div>
-                {{/if}}
-                {{/each}}
-            </div>
-        </section>
-    </div>
-
-    <div class="row">
-        <div class="col-md-11 form">
-            <h3>Add danother burger</h3>
-            <form class="create-form">
-                <div class="form-group">
-                    <label for="name"></label>
-                    <textarea id="name" name="burger-name" rows="2" cols="40" placeholder="What do you want to eat?"></textarea>
-                </div>
-                <button type="submit">Add da Burger</button>
-            </form>
-        </div>
-    </div>
+    <div class='btn-wrapper'>
+      <input id='submit-btn' class='btn' type="submit">
+    </div>  
+  </form>
 </div>
-</body>
-
-</html>
