@@ -34,8 +34,6 @@ document.addEventListener("DOMContentLoaded", function() {
       headers: {
         "Content-Type": "application/json"
       }
-    }).then(function() {
-      location.reload();
-    });
+    }).then(res => location.reload());
   });
 });
